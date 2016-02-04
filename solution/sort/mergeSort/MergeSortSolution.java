@@ -1,9 +1,11 @@
 package sort.mergeSort;
 
+import sort.SortChecker;
+
 public class MergeSortSolution implements MergeSortInterface {
 
 	@Override
-	public <T extends Comparable<T>> void mergeSort(T[] arr) {
+	public <T extends Comparable<T>> void sort(T[] arr) {
 		mergeSort(arr, 0, arr.length - 1);
 	}
 
@@ -33,19 +35,7 @@ public class MergeSortSolution implements MergeSortInterface {
 	}
 
 	public static void main(String[] args) {
-		MergeSortInterface ms = new MergeSortSolution();
-		Integer[] arr = new Integer[] { 4, 1, 5, 3, 2, 7 };
-		ms.mergeSort(arr);
-		for (int i = 0; i < arr.length; i++) {
-			System.out.print(arr[i] + ", ");
-		}
-		System.out.println();
-
-		String[] arr2 = new String[] { "ab", "cd", "ac", "bd", "abc", "cde" };
-		ms.mergeSort(arr2);
-		for (String s : arr2)
-			System.out.print(s + ",");
-		System.out.println();
-
+		SortChecker cheker = new SortChecker(MergeSortSolution.class);
+		System.out.println(cheker.checkAlgorithm());
 	}
 }

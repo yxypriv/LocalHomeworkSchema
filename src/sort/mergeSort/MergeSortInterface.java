@@ -1,5 +1,7 @@
 package sort.mergeSort;
 
-public interface MergeSortInterface {
-	<T extends Comparable<T>> void mergeSort(T[] arr);
+import sort.SortInterface;
+
+public interface MergeSortInterface extends SortInterface{
+	
 }

@@ -1,14 +1,14 @@
-package sort.mergeSort;
+package sort;
 
 import java.util.Arrays;
 import java.util.Random;
 
 import utils.RandomStringUtils;
 
-public class MergeSortChecker {
-	public MergeSortChecker(Class<? extends MergeSortInterface> target) {
+public class SortChecker {
+	public SortChecker(Class<? extends SortInterface> target) {
 		try {
-			this.mergeMethod = target.newInstance();
+			this.method = target.newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -36,9 +36,9 @@ public class MergeSortChecker {
 
 	private boolean checkingIntegerSimple() {
 		System.out.println("Checking Integer Simple");
-		Integer[] arr = new Integer[100];
+		Integer[] arr = new Integer[50];
 		for (int i = 0; i < arr.length; i++) {
-			arr[i] = rand.nextInt();
+			arr[i] = rand.nextInt(60);
 		}
 		return checking(arr, 20l);
 	}
@@ -65,7 +65,7 @@ public class MergeSortChecker {
 	private <T extends Comparable<T>> boolean checking(T[] arr, long time_limit) {
 		T[] ans = arr.clone();
 		long t0 = System.currentTimeMillis();
-		mergeMethod.mergeSort(arr);
+		method.sort(arr);
 		long time_cost = System.currentTimeMillis() - t0;
 		System.out.println("Time cost: " + time_cost);
 		if (time_cost > time_limit) {
@@ -76,16 +76,13 @@ public class MergeSortChecker {
 		for (int i = 0; i < arr.length; i++) {
 			if (!ans[i].equals(arr[i])) {
 				System.out.println("Failed due to incorrect solution");
+				System.out.println("Answer:\t" + Arrays.toString(ans));
+				System.out.println("Result:\t" + Arrays.toString(arr));
 				return false;
 			}
 		}
 		return true;
 	}
 
-	MergeSortInterface mergeMethod;
-
-	public static void main(String[] args) {
-		MergeSortChecker checker = new MergeSortChecker(MergeSortSolution.class);
-		System.out.println(checker.checkAlgorithm());
-	}
+	SortInterface method;
 }
